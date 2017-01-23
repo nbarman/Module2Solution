@@ -7,10 +7,25 @@
     <script src="angular.min.js"></script>
     <script src="app.js"></script>
     <style>
+      body{
+        background-color: lightblue;
+      }
       .emptyMessage {
         font-weight: bold;
         color: red;
         font-size: 1.2em;
+      }
+      h1{
+          font-style: italic;
+          font-family: Times New Roman;
+          text-align: center;
+
+      }
+      h2{
+        font-style: italic;
+        font-family: Times New Roman;
+        text-align: center;
+
       }
       li {
         margin-bottom: 7px;
@@ -22,11 +37,30 @@
       button > span {
         color: green;
       }
+      .vr{
+        style="width: 1px;
+        height: 2000px;
+        display: inline-block;
+
+      }
+      .col-md-6{
+
+        border-style: outset;
+        padding: 20px;
+        border-collapse: separate;
+        position: relative;
+      }
+      .col-md-7{
+        border: 1px solid #666;
+        padding: 20px;
+      }
     </style>
   </head>
 <body ng-app="ShoppingListCheckOff">
   <div class="container">
-  <h1>Shopping List Check Off</h1>
+    <div class= "boxed">
+        <h1>Shopping List Check Off</h1>
+    </div>
 
   <div class="row">
 
@@ -41,6 +75,7 @@
                    </ul>
                    <div class="emptyMessage" ng-if="toBuyCtrl.items.length == 0">Everything is bought!</div>
             </div>
+
 
             <!-- Added List -->
             <div id="addedToList" ng-controller="AddToListController as addtoListCtrl" class="col-md-6">
