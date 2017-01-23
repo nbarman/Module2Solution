@@ -54,6 +54,13 @@
         border: 1px solid #666;
         padding: 20px;
       }
+      img {
+        display: block;
+        margin: auto;
+        height:100px;
+        width:140px;
+
+      }
     </style>
   </head>
 <body ng-app="ShoppingListCheckOff">
@@ -61,7 +68,10 @@
     <div class= "boxed">
         <h1>Shopping List Check Off</h1>
     </div>
-
+    <div class = "image" ng-controller="ImageController">
+      <img ng-src="images/{{checklistStatus}}.png" height="100px" width="140px" >
+    </div>
+    <br>
   <div class="row">
 
             <!-- To Buy List -->

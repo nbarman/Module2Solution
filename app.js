@@ -2,9 +2,11 @@
 'use strict';
 //nbarman
 angular.module('ShoppingListCheckOff', [])
+.controller('ImageController', ImageController )
 .controller('AddToListController', AddToListController )
 .controller('ToBuyListController', ToBuyListController )
 .provider('ShoppingListItemsService', ShoppingListItemsServiceProvider);
+var imgStatus = "moneyface";
 
 var itemsList = [
 
@@ -25,13 +27,26 @@ var itemsList = [
         },
       ];
 
+  ImageController.$inject= ['$scope','ShoppingListItemsService'];
+  function ImageController($scope, ShoppingListItemsService){
+  $scope.checklistStatus = ShoppingListItemsService.getImgStatus();
+  $scope.service = ShoppingListItemsService;
+      $scope.$watch('service.setImgStatus()', function (newValue, oldValue) {
+         if(newValue!==oldValue){
+             $scope.checklistStatus = newValue;
+         }
+       });
+  }
+
+
 //Controller#1 ToBuyListController
 ToBuyListController.$inject = ['$scope', 'ShoppingListItemsService'];
 function ToBuyListController($scope, ShoppingListItemsService){
     var toBuyCtrl = this;
     toBuyCtrl.items = ShoppingListItemsService.getItemsOnList();
-  toBuyCtrl.addToBoughtList = function(index){
+    toBuyCtrl.addToBoughtList = function(index){
     ShoppingListItemsService.itemBought(index);
+    var checklistStatus =  ShoppingListItemsService.setImgStatus();
   };
 }
 
@@ -64,6 +79,16 @@ function ShoppingListItemsService(items){
   service.getItemsOnList = function(){
     return items;
   };
+  service.setImgStatus = function(){
+            if(itemsList.length == 0){
+                    imgStatus = "thumbsup";
+
+                  }
+                  return imgStatus;
+      }
+  service.getImgStatus = function(){
+     return imgStatus;
+  }
 
 }
 
